@@ -10,7 +10,7 @@ Tool for Pentester & BugHunter
 <!---<img src="bl4dsc4n.jpge" alt="bl4dsc4n"--->
 
 
-> Projeto criado com intuito de ajudar nos estudos de penteste.
+> Projeto criado com intuito de ajudar, nos estudos de penteste.
 
 
 ### Tools necessárias
