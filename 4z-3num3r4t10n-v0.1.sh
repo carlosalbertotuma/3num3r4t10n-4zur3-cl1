@@ -34,6 +34,7 @@ cd ~/AZURE-SAIDA
 #-----------------------------------------------------------------------------------
 echo -e "\e[5;32mEnumerando usuarios\e[0m"
 az ad user list | tee -a users-azure.txt
+cat  az-users.txt | grep "userPrincipalName" | grep -oh '"[^"]*"' | cut -d '"' -f2 | grep -v "userPrincipalName" | tee -a az-emails.txt
 #-----------------------------------------------------------------------------------
 echo -e "\e[5;32mEnumerando groups\e[0m"
 az ad group list | tee -a groups-azure.txt
