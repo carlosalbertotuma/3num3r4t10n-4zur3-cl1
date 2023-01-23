@@ -37,7 +37,8 @@ az ad user list | tee -a users-azure.txt
 cat  az-users.txt | grep "userPrincipalName" | grep -oh '"[^"]*"' | cut -d '"' -f2 | grep -v "userPrincipalName" | tee -a az-emails.txt
 #-----------------------------------------------------------------------------------
 echo -e "\e[5;32mEnumerando groups\e[0m"
-az ad group list | tee -a groups-azure.txt
+az ad group list | tee -a az-groups.txt
+cat ~/AZURE-SAIDA/az-groups.txt | grep displayName | grep -oh '"[^"]*"' | grep -v displayName | sort -u | tee -a az-groups-names.txt
 #-----------------------------------------------------------------------------------
 echo -e "\e[5;32mEnumerando apps\e[0m"
 az ad app list | tee -a apps-azure.txt
@@ -50,7 +51,7 @@ mkdir ~/AZURE-SAIDA/groups-users
 cd ~/AZURE-SAIDA/groups-users
 #-----------------------------------------------------------------------------------
 echo -e "\e[5;32mEnumerando usuarios por Grupo\e[0m"
-cat ~/AZURE-SAIDA/az-groups.txt | grep displayName | grep -oh '"[^"]*"' | grep -v displayName | sort -u | tee -a az-groups-names.txt | xargs -I@ bash -c 'az ad group member list --group "@" 2>/dev/null | tee -i "@".txt 2>/dev/null'
+cat ~/AZURE-SAIDA/az-groups-names.txt | xargs -I@ bash -c 'az ad group member list --group "@" 2>/dev/null | tee -i "@".txt 2>/dev/null'
 #-----------------------------------------------------------------------------------
 #excluindo arquivos com 0k
 find . -size 0k -exec rm {} \;
